@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/addsubject"
+        android:title="AddSubjects"
+        android:icon="@drawable/addsubject"/>
+    <item
+        android:id="@+id/subjects"
+        android:title="Subjects"
+        android:icon="@drawable/ic_action_addsubject"/>
+    <item
+        android:id="@+id/curriculum"
+        android:title="Curriculum"
+        android:icon="@drawable/ic_action_curriculum"/>
+    <item
+        android:id="@+id/tools"
+        android:title="Tools"
+        android:icon="@drawable/ic_action_tools"/>
+</menu>
