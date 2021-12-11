@@ -13,7 +13,7 @@
         android:title="Curriculum"
         android:icon="@drawable/ic_action_curriculum"/>
     <item
-        android:id="@+id/tools"
+        android:id="@+id/tools_menu"
         android:title="Tools"
         android:icon="@drawable/ic_action_tools"/>
 </menu>

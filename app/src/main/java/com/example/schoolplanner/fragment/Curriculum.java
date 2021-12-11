@@ -2,13 +2,30 @@ package com.example.schoolplanner.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
 
+import com.example.schoolplanner.Model.Subject;
 import com.example.schoolplanner.R;
+import com.example.schoolplanner.adapters.SubjectListAdapter;
+import com.example.schoolplanner.dao.DataBaseHandler;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +78,57 @@ public class Curriculum extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_curriculum, container, false);
+        View view = inflater.inflate(R.layout.fragment_curriculum, container, false);
+        DataBaseHandler db = new DataBaseHandler(getActivity());
+        List<Subject> subjects = db.getAllSubjects();
+
+        List<String> subjects_toShow = new ArrayList<>();
+        for(Subject subject : subjects){
+            subjects_toShow.add(subject.getName());
+        }
+        ArrayAdapter<String> dropDownAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, subjects_toShow);
+        Spinner spinner = (Spinner) view.findViewById(R.id.addsubject_curriculum);
+        spinner.setAdapter(dropDownAdapter);
+
+        Button button = view.findViewById(R.id.addsubject_curriculum_button);
+        ListView listView = view.findViewById(R.id.curriculumList);
+        List<Subject> subjectsAdded = new ArrayList<>();
+
+        SubjectListAdapter adapter =  new SubjectListAdapter(getActivity(), subjectsAdded);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subjectsAdded.add(db.findByTitle((String)spinner.getSelectedItem()));
+                listView.setAdapter(adapter);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                subjectsAdded.remove(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        Button getTools = view.findViewById(R.id.gettools);
+
+        getTools.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Set<String> tools = new HashSet<>();
+                for(Subject subject: subjectsAdded){
+                    tools.addAll(subject.getTools());
+                }
+                Bundle result = new Bundle();
+                result.putStringArrayList("Tool", new ArrayList<>(tools));
+                getActivity().getSupportFragmentManager().setFragmentResult("Tool", result);
+                BottomNavigationView navView = getActivity().findViewById(R.id.bottom_navigation);
+                navView.setSelectedItemId(R.id.tools_menu);
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Tools()).commit();
+            }
+        });
+        return view;
     }
 }

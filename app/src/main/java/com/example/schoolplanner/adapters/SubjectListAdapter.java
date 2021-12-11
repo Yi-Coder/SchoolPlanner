@@ -33,7 +33,7 @@ public class SubjectListAdapter extends ArrayAdapter<Subject> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
         TextView teacher = (TextView) rowView.findViewById(R.id.teacher);
-        TextView tools =  (TextView) rowView.findViewById(R.id.tools);
+        TextView tools =  (TextView) rowView.findViewById(R.id.tools_listview);
 
         imageView.setImageResource(subjects.get(position).getImgId());
 

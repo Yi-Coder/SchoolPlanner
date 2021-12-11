@@ -6,12 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.schoolplanner.Model.Subject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +32,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 //        context.deleteDatabase(DATABASE_NAME);
         //3rd argument to be passed is CursorFactory instance
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -67,7 +68,28 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    public List<Subject> getAllContacts() {
+    public Subject findByTitle(String input){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM Subject WHERE TRIM(name) = '"+input.trim()+"'", null);
+        if(c.moveToFirst()){
+            String title = c.getString(0);
+            String teacher = c.getString(1);
+            Integer imgId  = Integer.parseInt(c.getString(2));
+            List<String> tools = Arrays.asList(c.getString(3).split(","));
+            return new Subject(title,teacher,imgId,tools);
+        }
+        c.close();
+        return  null;
+    }
+
+
+    public boolean deleteByName(String input){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_Subject, KEY_NAME + "=?", new String[]{input}) > 0;
+
+    }
+
+    public List<Subject> getAllSubjects() {
         List<Subject> contactList = new ArrayList<Subject>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_Subject;

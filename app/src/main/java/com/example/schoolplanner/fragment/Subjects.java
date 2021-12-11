@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.schoolplanner.Model.Subject;
@@ -69,52 +70,27 @@ public class Subjects extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_subjects, container, false);
-
-//        Map<String, List<String>> subjects = new HashMap<>();
-//
-//        List<String> mathList = new ArrayList<>();
-//        mathList.add("math textbook");
-//        mathList.add("calculator");
-//        mathList.add("paper");
-//        subjects.put("math", mathList);
-//
-//        List<String> englishList = new ArrayList<>();
-//        mathList.add("english textbook");
-//        mathList.add("notebook");
-//        mathList.add("paper");
-//        subjects.put("english", englishList);
-//
-//
-//        List<String> scienceList = new ArrayList<>();
-//        mathList.add("computer");
-//        mathList.add("notebook");
-//        mathList.add("tool");
-//        subjects.put("science", scienceList);
-
         DataBaseHandler db = new DataBaseHandler(getActivity());
-
-        List<Subject> subjects = db.getAllContacts();
-
-//        subjects.add(new Subject("English", "Ms.eng", R.drawable.english, Arrays.asList("textBook", "paper", "pen")));
-//        subjects.add(new Subject("Math", "Mr.math", R.drawable.math, Arrays.asList("ruler", "paper", "calculator")));
-//        subjects.add(new Subject("Science", "Mr.sci", R.drawable.science, Arrays.asList("computer", "telescope", "pen")));
-//        subjects.add(new Subject("English", "Ms.eng", R.drawable.english, Arrays.asList("textBook", "paper", "pen")));
-//        subjects.add(new Subject("Math", "Mr.math", R.drawable.math, Arrays.asList("ruler", "paper", "calculator")));
-//        subjects.add(new Subject("Science", "Mr.sci", R.drawable.science, Arrays.asList("computer", "telescope", "pen")));
-//        subjects.add(new Subject("English", "Ms.eng", R.drawable.english, Arrays.asList("textBook", "paper", "pen")));
-//        subjects.add(new Subject("Math", "Mr.math", R.drawable.math, Arrays.asList("ruler", "paper", "calculator")));
-//        subjects.add(new Subject("Math", "Mr.math", R.drawable.math, Arrays.asList("ruler", "paper", "calculator")));
-
+        List<Subject> subjects = db.getAllSubjects();
         SubjectListAdapter listAdapter = new SubjectListAdapter(getActivity(), subjects);
-
         ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setAdapter(listAdapter);
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if(db.deleteByName(subjects.get(position).getName())){
+                    subjects.remove(position);
+                    listAdapter.notifyDataSetChanged();
+                }
+                return false;
+            }
+        });
         // Inflate the layout for this fragment
+
         return view;
-
-
     }
 }

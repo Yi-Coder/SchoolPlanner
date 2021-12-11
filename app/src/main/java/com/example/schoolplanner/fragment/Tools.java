@@ -2,13 +2,25 @@ package com.example.schoolplanner.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.schoolplanner.R;
+import com.example.schoolplanner.adapters.ToolListAdapter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +37,9 @@ public class Tools extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private List<String> tools = new ArrayList<>();
+    private List<Boolean> checked = new ArrayList<Boolean>();
+
 
     public Tools() {
         // Required empty public constructor
@@ -60,7 +75,22 @@ public class Tools extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_tools, container, false);
+        ListView listView = view.findViewById(R.id.toolList);
+        
+        ToolListAdapter adapter = new ToolListAdapter(getActivity(), tools, checked);
+        listView.setAdapter(adapter);
+        getActivity().getSupportFragmentManager().setFragmentResultListener("Tool", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                tools.addAll(result.getStringArrayList("Tool"));
+                checked.addAll(Arrays.asList(new Boolean[tools.size()]));
+                Collections.fill(checked, Boolean.FALSE);
+                adapter.notifyDataSetChanged();
+            }
+        });
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tools, container, false);
+        return view;
     }
+
 }

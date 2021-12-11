@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = " com.example.schoolplanner.MESSAGE";
-    private NavigationBarView.OnItemSelectedListener navListener = new NavigationBarView.OnItemSelectedListener() {
+    private BottomNavigationView.OnItemSelectedListener navListener = new BottomNavigationView.OnItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             // By using switch we can easily get
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.curriculum:
                     selectedFragment = new Curriculum();
                     break;
-                case R.id.tools:
+                case R.id.tools_menu:
                     selectedFragment = new Tools();
                     break;
             }
