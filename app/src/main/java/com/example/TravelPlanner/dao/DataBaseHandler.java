@@ -1,16 +1,12 @@
-package com.example.schoolplanner.dao;
+package com.example.TravelPlanner.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
-import android.widget.ArrayAdapter;
 
-import androidx.annotation.RequiresApi;
-
-import com.example.schoolplanner.Model.Subject;
+import com.example.TravelPlanner.Model.Subject;
 
 import java.util.ArrayList;
 import java.util.Arrays;

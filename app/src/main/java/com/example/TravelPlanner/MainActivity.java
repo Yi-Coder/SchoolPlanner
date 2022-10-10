@@ -1,4 +1,4 @@
-package com.example.schoolplanner;
+package com.example.TravelPlanner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,16 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.schoolplanner.dao.DataBaseHandler;
-import com.example.schoolplanner.fragment.AddSubject;
-import com.example.schoolplanner.fragment.Curriculum;
-import com.example.schoolplanner.fragment.Subjects;
-import com.example.schoolplanner.fragment.Tools;
+import com.example.TravelPlanner.R;
+import com.example.TravelPlanner.fragment.AddSubject;
+import com.example.TravelPlanner.fragment.Curriculum;
+import com.example.TravelPlanner.fragment.Subjects;
+import com.example.TravelPlanner.fragment.Tools;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = " com.example.schoolplanner.MESSAGE";
+    public static final String EXTRA_MESSAGE = " com.example.TravelPlanner.MESSAGE";
     private BottomNavigationView.OnItemSelectedListener navListener = new BottomNavigationView.OnItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -47,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+
 
 
 

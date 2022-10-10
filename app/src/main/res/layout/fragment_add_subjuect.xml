@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:background="@drawable/edittextstyle"
-        android:hint=" Subject name"
+        android:hint="Travel City"
         android:singleLine="true"
         android:id="@+id/input_title"/>
 
@@ -22,7 +22,7 @@
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:background="@drawable/edittextstyle"
-        android:hint=" teacher name"
+        android:hint="Country"
         app:layout_constraintTop_toBottomOf="@id/input_title"
         android:singleLine="true"
         android:id="@+id/teacherName"/>
@@ -44,7 +44,7 @@
         android:layout_height="50dp"
         android:layout_margin="5dp"
         android:background="@drawable/edittextstyle"
-        android:hint=" tools"
+        android:hint="Place TBV"
         app:layout_constraintTop_toBottomOf="@id/imgid"
         android:singleLine="true"
         android:id="@+id/tools"/>

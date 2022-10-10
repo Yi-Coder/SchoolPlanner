@@ -1,4 +1,4 @@
-package com.example.schoolplanner.adapters;
+package com.example.TravelPlanner.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.schoolplanner.R;
+import com.example.TravelPlanner.R;
 
 public class SpinnerAdapter  extends ArrayAdapter<Integer> {
 

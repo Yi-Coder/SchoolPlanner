@@ -1,26 +1,22 @@
-package com.example.schoolplanner.fragment;
+package com.example.TravelPlanner.fragment;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.ListFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.schoolplanner.Model.Subject;
-import com.example.schoolplanner.R;
-import com.example.schoolplanner.adapters.SpinnerAdapter;
-import com.example.schoolplanner.dao.DataBaseHandler;
+import com.example.TravelPlanner.dao.DataBaseHandler;
+import com.example.TravelPlanner.Model.Subject;
+import com.example.TravelPlanner.R;
+import com.example.TravelPlanner.adapters.SpinnerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
@@ -34,7 +30,7 @@ import java.util.List;
 public class AddSubject extends Fragment {
 
 
-    private Integer [] images = new  Integer [] { R.drawable.math, R.drawable.english, R.drawable.science,  R.drawable.science};
+    private Integer [] images = new  Integer [] { R.drawable.math, R.drawable.english, R.drawable.science,  R.drawable.science, R.drawable.atlanta_city, R.drawable.atlantacity2};
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

@@ -1,7 +1,6 @@
-package com.example.schoolplanner.adapters;
+package com.example.TravelPlanner.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import com.example.schoolplanner.Model.Subject;
-import com.example.schoolplanner.R;
+
+import com.example.TravelPlanner.Model.Subject;
+import com.example.TravelPlanner.R;
 
 import java.util.List;
 

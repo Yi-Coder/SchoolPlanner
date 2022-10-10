@@ -1,30 +1,29 @@
-package com.example.schoolplanner.fragment;
+package com.example.TravelPlanner.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.schoolplanner.Model.Subject;
-import com.example.schoolplanner.R;
-import com.example.schoolplanner.adapters.SubjectListAdapter;
-import com.example.schoolplanner.dao.DataBaseHandler;
-
+import com.example.TravelPlanner.adapters.ToolListAdapter;
+import com.example.TravelPlanner.R;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Subjects#newInstance} factory method to
+ * Use the {@link Tools#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Subjects extends Fragment {
+public class Tools extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +33,11 @@ public class Subjects extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private List<String> tools = new ArrayList<>();
+    private List<Boolean> checked = new ArrayList<Boolean>();
 
-    public Subjects() {
+
+    public Tools() {
         // Required empty public constructor
     }
 
@@ -45,11 +47,11 @@ public class Subjects extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Subjects.
+     * @return A new instance of fragment Tools.
      */
     // TODO: Rename and change types and number of parameters
-    public static Subjects newInstance(String param1, String param2) {
-        Subjects fragment = new Subjects();
+    public static Tools newInstance(String param1, String param2) {
+        Tools fragment = new Tools();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,28 +71,22 @@ public class Subjects extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_subjects, container, false);
-        DataBaseHandler db = new DataBaseHandler(getActivity());
-        List<Subject> subjects = db.getAllSubjects();
-        SubjectListAdapter listAdapter = new SubjectListAdapter(getActivity(), subjects);
-        ListView listView = (ListView) view.findViewById(android.R.id.list);
-        listView.setAdapter(listAdapter);
+        View view = inflater.inflate(R.layout.fragment_tools, container, false);
+        ListView listView = view.findViewById(R.id.toolList);
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-
+        ToolListAdapter adapter = new ToolListAdapter(getActivity(), tools, checked);
+        listView.setAdapter(adapter);
+        getActivity().getSupportFragmentManager().setFragmentResultListener("Tool", this, new FragmentResultListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if(db.deleteByName(subjects.get(position).getName())){
-                    subjects.remove(position);
-                    listAdapter.notifyDataSetChanged();
-                }
-                return false;
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                tools.addAll(result.getStringArrayList("Tool"));
+                checked.addAll(Arrays.asList(new Boolean[tools.size()]));
+                Collections.fill(checked, Boolean.FALSE);
+                adapter.notifyDataSetChanged();
             }
         });
         // Inflate the layout for this fragment
-
         return view;
     }
+
 }

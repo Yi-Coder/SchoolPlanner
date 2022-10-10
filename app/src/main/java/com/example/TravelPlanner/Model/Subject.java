@@ -1,4 +1,4 @@
-package com.example.schoolplanner.Model;
+package com.example.TravelPlanner.Model;
 
 import java.util.List;
 

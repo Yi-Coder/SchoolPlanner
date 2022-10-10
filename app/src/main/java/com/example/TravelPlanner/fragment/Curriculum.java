@@ -1,10 +1,8 @@
-package com.example.schoolplanner.fragment;
+package com.example.TravelPlanner.fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentResultListener;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +13,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.schoolplanner.Model.Subject;
-import com.example.schoolplanner.R;
-import com.example.schoolplanner.adapters.SubjectListAdapter;
-import com.example.schoolplanner.dao.DataBaseHandler;
+import com.example.TravelPlanner.Model.Subject;
+import com.example.TravelPlanner.R;
+import com.example.TravelPlanner.adapters.SubjectListAdapter;
+import com.example.TravelPlanner.dao.DataBaseHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * A simple {@link Fragment} subclass.
